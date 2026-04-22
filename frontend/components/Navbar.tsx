@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Home, PieChart, ArrowLeft, MoreHorizontal, MessageSquare, Briefcase, Calculator, ShieldAlert } from 'lucide-react';
+import { Home, PieChart, ArrowLeft, MoreHorizontal, MessageSquare, Briefcase, Calculator, ShieldAlert, User } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { Button } from './ui/button';
 
@@ -68,6 +68,12 @@ export function Navbar() {
             </Link>
           </div>
           
+          <Link href="/profile">
+            <Button variant="ghost" size="icon" className="rounded-full text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              <User size={20} />
+            </Button>
+          </Link>
+
           <ThemeToggle />
           
           <Button variant="outline" size="icon" className="md:hidden border-slate-200 dark:border-slate-800 rounded-full text-slate-600 dark:text-slate-400">
