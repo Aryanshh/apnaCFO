@@ -55,9 +55,8 @@ export function Navbar() {
           <NavLink href="/" icon={<Home size={16} />} label="Home" active={pathname === '/'} />
           <NavLink href="/dashboard" icon={<PieChart size={16} />} label="Portfolio" active={pathname === '/dashboard'} />
           <NavLink href="/booking" icon={<Briefcase size={16} />} label="Services" active={pathname === '/booking'} />
-          <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-1 hidden lg:block"></div>
-          <NavLink href="/calculators/portfolio" icon={<Calculator size={16} />} label="Returns Calc" active={pathname === '/calculators/portfolio'} />
-          <NavLink href="/calculators/risk" icon={<ShieldAlert size={16} />} label="Risk Calc" active={pathname === '/calculators/risk'} />
+          <NavLink href="/calculators/portfolio" icon={<Calculator size={16} />} label="Return Calculator" active={pathname === '/calculators/portfolio'} />
+          <NavLink href="/calculators/risk" icon={<ShieldAlert size={16} />} label="Risk Calculator" active={pathname === '/calculators/risk'} />
         </div>
 
         <div className="flex items-center gap-2 md:gap-3">
