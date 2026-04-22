@@ -1,6 +1,6 @@
 import os
-from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
+import asyncio
+from mistralai.client import Mistral
 from typing import List, Optional
 from dotenv import load_dotenv
 
@@ -10,11 +10,9 @@ class MistralService:
     def __init__(self):
         self.api_key = os.getenv("MISTRAL_API_KEY")
         if not self.api_key:
-            # We don't raise error here to allow the server to start even without key initially
-            # but we will handle it in the chat method
             pass
-        self.client = MistralClient(api_key=self.api_key)
-        self.model = "mistral-tiny" # Good for free/cheap tier, "mistral-small" or "mistral-medium" for better quality
+        self.client = Mistral(api_key=self.api_key)
+        self.model = "mistral-tiny"
 
     async def get_chat_response(self, message: str, history: List[dict], system_prompt: str, language: str = "hi"):
         """
@@ -23,7 +21,6 @@ class MistralService:
         if not self.api_key:
             return self._get_error_message(language)
 
-        # Refine system prompt based on language
         purity_instruction = ""
         if language == "en":
             purity_instruction = "\nSTRICT RULE: Use PURE ENGLISH only. No Hindi, No Hinglish, No code-switching."
@@ -34,24 +31,30 @@ class MistralService:
 
         full_system_prompt = system_prompt + purity_instruction
         
-        # Format history for Mistral
         messages = [
-            ChatMessage(role="system", content=full_system_prompt)
+            {"role": "system", "content": full_system_prompt}
         ]
         
         for msg in history:
-            messages.append(ChatMessage(role=msg["role"], content=msg["content"]))
+            messages.append({"role": msg["role"], "content": msg["content"]})
             
-        messages.append(ChatMessage(role="user", content=message))
+        messages.append({"role": "user", "content": message})
 
         try:
-            chat_response = self.client.chat(
-                model=self.model,
-                messages=messages,
+            # Run the synchronous Mistral client in a thread pool to avoid blocking the event loop
+            loop = asyncio.get_event_loop()
+            chat_response = await loop.run_in_executor(
+                None,
+                lambda: self.client.chat.complete(
+                    model=self.model,
+                    messages=messages,
+                )
             )
             return chat_response.choices[0].message.content
         except Exception as e:
-            print(f"Error calling Mistral API: {e}")
+            import traceback
+            print(f"❌ Mistral API Error: {e}")
+            traceback.print_exc()
             return self._get_error_message(language)
 
     def _get_error_message(self, language: str):

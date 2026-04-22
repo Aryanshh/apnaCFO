@@ -20,9 +20,9 @@ export default function Home() {
 
   if (!selectedLanguage) {
     return (
-      <main className="min-h-screen bg-white dark:bg-slate-950 flex flex-col items-center justify-center p-6 transition-colors duration-500">
+      <main className="h-full w-full bg-white dark:bg-slate-950 flex flex-col items-center justify-center p-6 transition-colors duration-500">
         <div className="fixed top-6 right-6 z-50">
-          <ThemeToggle />
+          {/* ThemeToggle now handled by global Navbar */}
         </div>
         <div className="text-center mb-12 animate-in fade-in zoom-in duration-700">
           <h1 className="text-5xl font-black text-emerald-600 dark:text-emerald-400 mb-2">APNA CFO</h1>
@@ -79,7 +79,7 @@ export default function Home() {
 
   if (view === 'chat') {
     return (
-      <main className="min-h-screen bg-slate-50 dark:bg-slate-950 p-4 md:p-8 flex flex-col items-center pt-20">
+      <main className="h-full w-full bg-slate-50 dark:bg-slate-950 p-4 md:p-8 flex flex-col items-center">
         <div className="fixed top-6 right-6 z-50">
           <ThemeToggle />
         </div>
@@ -102,7 +102,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6 md:p-12 transition-colors duration-500">
+    <main className="h-full w-full bg-slate-50 dark:bg-slate-950 p-6 md:p-12 transition-colors duration-500">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="flex justify-between items-center mb-12">
@@ -119,7 +119,7 @@ export default function Home() {
                 <ShieldCheck size={12} /> {l.secure}
               </span>
             </div>
-            <ThemeToggle />
+            {/* ThemeToggle moved to global Navbar */}
           </div>
         </header>
 

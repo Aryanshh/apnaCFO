@@ -27,19 +27,20 @@ export default function LanguageSelector({ onSelect }: LanguageSelectorProps) {
           <button
             key={lang.code}
             onClick={() => onSelect(lang.code)}
-            className="group p-6 bg-white border-2 border-slate-100 rounded-3xl hover:border-emerald-500 hover:shadow-xl transition-all text-left flex flex-col justify-between h-48"
+            className="group p-6 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-xl transition-all text-left flex flex-col justify-between h-48"
           >
             <div>
-              <p className="text-4xl font-bold text-slate-800 mb-2">{lang.native}</p>
-              <p className="font-medium text-slate-600">{lang.label}</p>
+              <p className="text-4xl font-bold text-slate-800 dark:text-white mb-2">{lang.native}</p>
+              <p className="font-medium text-slate-600 dark:text-slate-400">{lang.label}</p>
             </div>
             <div className="flex items-center justify-between mt-4">
               <span className="text-xs text-slate-400 uppercase tracking-widest">{lang.description}</span>
-              <div className="p-2 bg-emerald-50 text-emerald-600 rounded-full group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+              <div className="p-2 bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 rounded-full group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                 <ArrowRight size={20} />
               </div>
             </div>
           </button>
+
         ))}
       </div>
 

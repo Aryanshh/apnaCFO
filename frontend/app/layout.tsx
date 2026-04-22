@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 import { ThemeProvider } from "@/components/providers";
+import { Navbar } from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Apna CFO - Vernacular AI Finance Advisor",
@@ -32,7 +33,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <Navbar />
+          <main className="flex-1 pt-24 pb-8 relative">
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>

@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
-from routers import chat, fd, auth, b2b
+from routers import chat, fd, auth, b2b, finance
 import time
 
 # Rate Limiter setup
@@ -17,6 +17,7 @@ app.include_router(chat.router)
 app.include_router(fd.router)
 app.include_router(auth.router)
 app.include_router(b2b.router)
+app.include_router(finance.router)
 
 # Production CORS
 app.add_middleware(
