@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+anthropic
+pydantic
+pydantic-settings
+motor
+supabase
+httpx
+langdetect
+python-dotenv
+slowapi
+beautifulsoup4
+schedule
+pymongo
+requests
