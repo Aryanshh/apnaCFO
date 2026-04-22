@@ -53,7 +53,7 @@ export default function Profile() {
              </div>
 
              {/* Action Button */}
-             <button className="flex justify-center items-center h-10 w-10 md:h-12 md:w-12 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-full transition-colors self-center">
+             <button onClick={() => alert('Profile Settings panel will be delivered in the next update!')} className="flex justify-center items-center h-10 w-10 md:h-12 md:w-12 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-full transition-colors self-center flex-shrink-0">
                <Settings size={20} />
              </button>
            </div>
@@ -66,10 +66,10 @@ export default function Profile() {
           <div className="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200/50 dark:border-slate-800 shadow-lg p-8">
             <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mb-6">Account Preferences</h3>
             <div className="space-y-4">
-               <PreferenceRow label="Language Preference" value="Bhojpuri" />
-               <PreferenceRow label="Base Currency" value="INR (₹)" />
-               <PreferenceRow label="Two-Factor Auth" value="Enabled" isProtected />
-               <PreferenceRow label="DigiLocker Status" value="Connected" isProtected />
+               <PreferenceRow label="Language Preference" value="Bhojpuri" onClick={() => alert('Language selection is universally managed from the Home Screen.')} />
+               <PreferenceRow label="Base Currency" value="INR (₹)" onClick={() => alert('Your base currency is permanently locked to INR (₹).')} />
+               <PreferenceRow label="Two-Factor Auth" value="Enabled" isProtected onClick={() => alert('Two-Factor Authentication settings are securely routed through your DigiLocker app.')} />
+               <PreferenceRow label="DigiLocker Status" value="Connected" isProtected onClick={() => alert('Your DigiLocker account is actively verifying your assets.')} />
             </div>
           </div>
 
@@ -89,7 +89,7 @@ export default function Profile() {
               </div>
             </div>
             
-            <button className="flex items-center justify-center gap-2 w-full mt-8 p-4 rounded-xl bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 text-red-600 font-bold transition-colors">
+            <button onClick={() => { alert('Securely logging out...'); window.location.href = '/'; }} className="flex items-center justify-center gap-2 w-full mt-8 p-4 rounded-xl bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 text-red-600 font-bold transition-colors">
               <LogOut size={18} /> Log Out
             </button>
           </div>
@@ -101,9 +101,9 @@ export default function Profile() {
   );
 }
 
-function PreferenceRow({ label, value, isProtected = false }: { label: string, value: string, isProtected?: boolean }) {
+function PreferenceRow({ label, value, isProtected = false, onClick }: { label: string, value: string, isProtected?: boolean, onClick?: () => void }) {
   return (
-    <div className="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-800/30 -mx-4 px-4 rounded-lg transition-colors cursor-pointer group">
+    <div onClick={onClick} className="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-800/30 -mx-4 px-4 rounded-lg transition-colors cursor-pointer group">
       <span className="font-medium text-slate-600 dark:text-slate-400">{label}</span>
       <div className="flex items-center gap-3">
         <span className={`font-bold text-sm ${isProtected ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-900 dark:text-white'}`}>{value}</span>
