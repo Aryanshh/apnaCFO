@@ -31,15 +31,17 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => router.back()}
-            className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-full bg-slate-100/50 dark:bg-slate-800/50 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all"
-            title="Go Back"
-          >
-            <ArrowLeft size={20} />
-          </Button>
+          {pathname !== '/' && (
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => router.back()}
+              className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-full bg-slate-100/50 dark:bg-slate-800/50 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all"
+              title="Go Back"
+            >
+              <ArrowLeft size={20} />
+            </Button>
+          )}
 
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold shadow-md group-hover:scale-105 transition-transform">
