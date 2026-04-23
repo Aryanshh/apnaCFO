@@ -13,3 +13,4 @@ beautifulsoup4
 schedule
 pymongo
 requests
+mistralai
