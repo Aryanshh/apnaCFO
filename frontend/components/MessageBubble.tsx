@@ -37,13 +37,24 @@ export default function MessageBubble({ role, content }: MessageBubbleProps) {
         }`}
       >
         {isAssistant ? (
-          <div>
+          <div className="space-y-1">
             {parts.map((part, i) => {
               if (part.startsWith('(') && part.endsWith(')')) {
                 const term = part.slice(1, -1);
                 return <JargonCard key={i} term={term} />;
               }
-              return <span key={i}>{part}</span>;
+              // Parse **bold** markdown dynamically
+              const boldChunks = part.split(/(\*\*.*?\*\*)/g);
+              return (
+                <span key={i} className="whitespace-pre-wrap leading-relaxed text-[15px]">
+                  {boldChunks.map((chunk, j) => {
+                    if (chunk.startsWith('**') && chunk.endsWith('**')) {
+                      return <strong key={j} className="font-bold text-emerald-800 dark:text-emerald-300">{chunk.slice(2, -2)}</strong>;
+                    }
+                    return <span key={j}>{chunk}</span>;
+                  })}
+                </span>
+              );
             })}
             {hasComparison && <FDCompareTable rates={mockRates} />}
             {hasBooking && <BookingWizard />}

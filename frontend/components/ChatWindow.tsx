@@ -25,6 +25,22 @@ export default function ChatWindow({ initialLanguage = 'hi' }: ChatWindowProps) 
     }
   };
 
+  const getPlaceholder = () => {
+    switch(initialLanguage) {
+      case 'hi': return 'अपना सवाल यहाँ लिखें...';
+      case 'bho': return 'आपन सवाल इहाँ लिखीं...';
+      default: return 'Type your financial question...';
+    }
+  };
+
+  const getLoadingText = () => {
+    switch(initialLanguage) {
+      case 'hi': return 'अपना CFO विचार कर रहा है...';
+      case 'bho': return 'अपना CFO विचार करत बा...';
+      default: return 'Apna CFO is analyzing...';
+    }
+  };
+
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: getInitialMessage() }
   ]);
@@ -96,7 +112,7 @@ export default function ChatWindow({ initialLanguage = 'hi' }: ChatWindowProps) 
                 <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-75"></span>
                 <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-150"></span>
               </div>
-              Apna CFO سوچ रहा है...
+              {getLoadingText()}
             </div>
           </div>
         )}
@@ -109,7 +125,7 @@ export default function ChatWindow({ initialLanguage = 'hi' }: ChatWindowProps) 
         </Button>
         <Input 
           className="flex-1 bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 rounded-full px-4 h-11 shadow-inner placeholder:text-sm" 
-          placeholder="अपना सवाल लिखें... (Type your question...)"
+          placeholder={getPlaceholder()}
           value={input}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleSend()}
