@@ -33,7 +33,8 @@ export function FinanceNews({ language }: FinanceNewsProps) {
   useEffect(() => {
     const fetchFinance = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/finance/live?language=${language}`);
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const res = await fetch(`${apiUrl}/api/finance/live?language=${language}`);
         const json = await res.json();
         setData(json);
       } catch (err) {
