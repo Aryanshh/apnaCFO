@@ -111,8 +111,8 @@ export default function ChatWindow({ initialLanguage = 'hi' }: ChatWindowProps) 
           className="flex-1 bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 rounded-full px-4 h-11 shadow-inner placeholder:text-sm" 
           placeholder="अपना सवाल लिखें... (Type your question...)"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleSend()}
         />
         <Button 
           className="bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white rounded-full p-2 h-11 w-11 shadow-md transition-all active:scale-95 disabled:opacity-50"
