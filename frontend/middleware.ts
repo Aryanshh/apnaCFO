@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 // Configuration of protected routes that require a valid session
-const protectedRoutes = ['/dashboard', '/profile', '/booking', '/calculators/portfolio', '/calculators/risk'];
+const protectedRoutes = ['/dashboard', '/profile', '/booking', '/calculators/portfolio', '/calculators/risk', '/chat', '/select-language'];
 
 export function middleware(request: NextRequest) {
   // Check if current route is protected
@@ -35,6 +35,8 @@ export const config = {
     '/profile/:path*',
     '/booking/:path*',
     '/calculators/:path*',
+    '/chat/:path*',
+    '/select-language/:path*',
     '/auth'
   ],
 };

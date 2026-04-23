@@ -21,7 +21,7 @@ export default function AuthPage() {
       // In production, this uses supabase.auth.setSession()
       // For prototype testing, we inject a cookie that Middleware reads
       document.cookie = "apna_cfo_session=true; path=/; max-age=86400";
-      router.push('/dashboard');
+      router.push('/select-language');
     }, 1500);
   };
 

@@ -4,6 +4,8 @@ from datetime import datetime
 import asyncio
 from pydantic import BaseModel
 from typing import List, Optional
+import urllib.request
+import xml.etree.ElementTree as ET
 
 router = APIRouter(prefix="/api/finance", tags=["Finance"])
 
@@ -79,7 +81,26 @@ async def get_live_finance(language: str = 'hi'):
 
         # Format news
         formatted_news = []
-        for n in (news_data or [])[:4]:
+        news_list = news_data or []
+        
+        # Fallback to Economic Times Live RSS if yfinance is broken
+        if not news_list:
+            try:
+                url = "https://economictimes.indiatimes.com/markets/rssfeeds/2146842.cms"
+                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req, timeout=5) as response:
+                    tree = ET.parse(response)
+                    root = tree.getroot()
+                    for item in root.findall('./channel/item')[:5]:
+                        news_list.append({
+                            'title': item.find('title').text,
+                            'publisher': 'Economic Times',
+                            'providerPublishTime': int(now.timestamp())
+                        })
+            except Exception as rss_err:
+                print(f"RSS Fetch Error: {rss_err}")
+
+        for n in news_list[:5]:
             formatted_news.append(NewsItem(
                 title=n.get('title', ''),
                 source=n.get('publisher', 'Market News'),
