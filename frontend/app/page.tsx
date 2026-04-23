@@ -15,11 +15,11 @@ export default function Home() {
         {/* Quote Block */}
         <div className="space-y-6">
           <div className="mx-auto w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center shadow-lg border border-emerald-200 dark:border-emerald-800/50 mb-8">
-            <span className="text-4xl font-serif">"</span>
+            <span className="text-4xl font-serif">&quot;</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-slate-800 dark:text-white leading-[1.1] tracking-tight">
             Wealth is not about having a lot of money; <br/>
-            it's about having a lot of <span className="text-emerald-600 dark:text-emerald-400 underline decoration-emerald-200 dark:decoration-emerald-900 underline-offset-8">options.</span>
+            it&apos;s about having a lot of <span className="text-emerald-600 dark:text-emerald-400 underline decoration-emerald-200 dark:decoration-emerald-900 underline-offset-8">options.</span>
           </h1>
           <p className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed mt-6">
             Meet Apna CFO, the intelligent advisor built for Bharat. Secure your assets and explore your financial freedom today.
