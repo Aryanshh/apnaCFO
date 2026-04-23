@@ -68,11 +68,19 @@ export function Navbar() {
             </Link>
           </div>
           
-          <Link href="/profile">
-            <Button variant="ghost" size="icon" className="rounded-full text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-              <User size={20} />
-            </Button>
-          </Link>
+          {typeof window !== 'undefined' && document.cookie.includes('apna_cfo_session') ? (
+            <Link href="/profile">
+              <Button variant="ghost" size="icon" className="rounded-full text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <User size={20} />
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/auth">
+              <Button className="rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 font-bold px-5 text-sm hidden sm:flex transition-transform hover:scale-105 active:scale-95 shadow-md">
+                Secure Login
+              </Button>
+            </Link>
+          )}
 
           <ThemeToggle />
           

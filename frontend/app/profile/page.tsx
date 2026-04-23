@@ -89,7 +89,11 @@ export default function Profile() {
               </div>
             </div>
             
-            <button onClick={() => { alert('Securely logging out...'); window.location.href = '/'; }} className="flex items-center justify-center gap-2 w-full mt-8 p-4 rounded-xl bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 text-red-600 font-bold transition-colors">
+            <button onClick={() => { 
+              alert('Securely logging out...'); 
+              document.cookie = "apna_cfo_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+              window.location.href = '/'; 
+            }} className="flex items-center justify-center gap-2 w-full mt-8 p-4 rounded-xl bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 text-red-600 font-bold transition-colors">
               <LogOut size={18} /> Log Out
             </button>
           </div>
