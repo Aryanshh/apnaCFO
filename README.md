@@ -1,5 +1,7 @@
 # Apna CFO - Vernacular-First AI Personal Finance Advisor 🇮🇳
 
+**Live Deployment:** [https://apnacfo.vercel.app/](https://apnacfo.vercel.app/)
+
 Apna CFO is a premium, AI-powered financial advisor specifically built for Tier-2 and Tier-3 India. It provides jargon-free financial guidance in **Pure Hindi**, **Pure Bhojpuri**, and **Pure English** (100% no Hinglish).
 
 ![Home Page Mockup](file:///C:/Users/aryan/.gemini/antigravity/brain/b5f6ae2e-a872-417a-a469-0458c51bf55a/initial_page_load_1776878146050.png)

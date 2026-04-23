@@ -1,10 +1,74 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { PieChart, TrendingUp, Wallet, ArrowRight, ShieldCheck, ArrowUpRight, Activity } from 'lucide-react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-export default function Dashboard() {
+function DashboardContent() {
+  const searchParams = useSearchParams();
+  const lang = searchParams.get('lang') || 'hi';
+
+  const t = {
+    hi: {
+      title: "मेरा पोर्टफोलियो",
+      subtitle: "अपनी बचत और FD का लाइव ट्रैक यहाँ देखें। आप वर्तमान में एक बेहतरीन रिटर्न प्रोफ़ाइल बनाए रखे हैं।",
+      book_fd: "नया FD बुक करें",
+      investment: "कुल निवेश",
+      returns: "अनुमानित रिटर्न",
+      avg_rate: "औसत ब्याज दर",
+      health: "पोर्टफोलियो हेल्थ",
+      excellent: "उत्कृष्ट",
+      health_desc: "आपका निवेश पूरी तरह से सुरक्षित है और महंगाई को मात दे रहा है।",
+      active_fd: "एक्टिव फिक्स्ड डिपॉजिट",
+      active_desc: "आपके सभी वर्तमान निवेश एक नज़र में।",
+      col_bank: "बैंक",
+      col_amt: "राशि",
+      col_rate: "दर",
+      col_mat: "मैच्योरिटी",
+      col_status: "स्थिति",
+      col_action: "विवरण"
+    },
+    bho: {
+      title: "हमर पोर्टफोलियो",
+      subtitle: "आपन बचत और ऐपडी (FD) के लाइव ट्रैक इहाँ देखीं। राउर रिटर्न प्रोफाइल एगो बढ़िया स्तर पर बा।",
+      book_fd: "नया FD बुक करीं",
+      investment: "कुल निवेश",
+      returns: "अनुमानित रिटर्न",
+      avg_rate: "औसत ब्याज दर",
+      health: "पोर्टफोलियो हेल्थ",
+      excellent: "गज़ब",
+      health_desc: "राउर निवेश पूरी तरह से सुरक्षित बा और महंगाई के मात दे रहल बा।",
+      active_fd: "एक्टिव फिक्स्ड डिपॉजिट",
+      active_desc: "राउर सब वर्तमान निवेश एक नज़र में।",
+      col_bank: "बैंक",
+      col_amt: "राशि",
+      col_rate: "दर",
+      col_mat: "मैच्योरिटी",
+      col_status: "स्थिति",
+      col_action: "विवरण"
+    },
+    en: {
+      title: "My Portfolio",
+      subtitle: "Track your savings and FDs live here. You are currently averaging an excellent return profile.",
+      book_fd: "Book New FD",
+      investment: "Total Investment",
+      returns: "Projected Returns",
+      avg_rate: "Average Interest Rate",
+      health: "Portfolio Health",
+      excellent: "Excellent",
+      health_desc: "Your investments are fully secured and outperforming inflation.",
+      active_fd: "Active Fixed Deposits",
+      active_desc: "All your current investments in one place.",
+      col_bank: "Bank",
+      col_amt: "Amount",
+      col_rate: "Rate",
+      col_mat: "Maturity",
+      col_status: "Status",
+      col_action: "Details"
+    }
+  }[lang as 'hi' | 'bho' | 'en'] || t['hi'];
+
   const activeFDs = [
     { bank: 'SBI', amount: 50000, rate: 7.0, maturity: '2026-05-20', status: 'Active' },
     { bank: 'AU Small Finance', amount: 120000, rate: 7.75, maturity: '2027-02-15', status: 'Active' },
@@ -20,16 +84,16 @@ export default function Dashboard() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-400/10 dark:bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           <div className="relative z-10 w-full lg:w-auto">
             <div className="flex items-center gap-3 mb-2">
-              <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">Mera Portfolio</h1>
+              <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">{t.title}</h1>
               <div className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-1 shadow-sm">
                 <ShieldCheck size={14} /> Secured
               </div>
             </div>
-            <p className="text-lg text-slate-600 dark:text-slate-400 font-medium max-w-xl">Apni savings aur FDs ka live track yahan dekhein. You are currently averaging an excellent return profile.</p>
+            <p className="text-lg text-slate-600 dark:text-slate-400 font-medium max-w-xl">{t.subtitle}</p>
           </div>
-          <Link href="/booking" className="relative z-10 w-full sm:w-auto">
+          <Link href={`/booking?lang=${lang}`} className="relative z-10 w-full sm:w-auto">
             <button className="w-full sm:w-auto group relative px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-bold overflow-hidden transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
-              <span className="relative z-10 flex items-center justify-center gap-2">Naya FD Book Karein <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={20} /></span>
+              <span className="relative z-10 flex items-center justify-center gap-2">{t.book_fd} <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={20} /></span>
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               <div className="absolute inset-0 bg-white/20 dark:bg-black/10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 pointer-events-none" />
             </button>
@@ -42,9 +106,9 @@ export default function Dashboard() {
               <div className="p-4 bg-emerald-100/50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-2xl group-hover:scale-110 transition-transform shadow-sm">
                 <Wallet size={28} />
               </div>
-              <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 rounded-full">+12% vs last month</span>
+              <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 rounded-full">+12%</span>
             </div>
-            <h3 className="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-sm mb-2">Kul Nivesh (Total Investment)</h3>
+            <h3 className="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-sm mb-2">{t.investment}</h3>
             <p className="text-4xl font-extrabold text-slate-900 dark:text-white">₹3,70,000</p>
           </div>
 
@@ -54,7 +118,7 @@ export default function Dashboard() {
                 <TrendingUp size={28} />
               </div>
             </div>
-            <h3 className="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-sm mb-2">Anumaanit Return (Proj. Returns)</h3>
+            <h3 className="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-sm mb-2">{t.returns}</h3>
             <p className="text-4xl font-extrabold text-slate-900 dark:text-white">₹27,850</p>
           </div>
 
@@ -64,7 +128,7 @@ export default function Dashboard() {
                 <PieChart size={28} />
               </div>
             </div>
-            <h3 className="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-sm mb-2">Average Interest Rate</h3>
+            <h3 className="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-sm mb-2">{t.avg_rate}</h3>
             <p className="text-4xl font-extrabold text-slate-900 dark:text-white">7.35%</p>
           </div>
           
@@ -76,10 +140,10 @@ export default function Dashboard() {
                  <div className="p-3 bg-white/20 rounded-xl backdrop-blur-md">
                    <Activity size={24} className="text-white" />
                  </div>
-                 <h3 className="font-bold text-emerald-100 uppercase tracking-wider text-sm">Portfolio Health</h3>
+                 <h3 className="font-bold text-emerald-100 uppercase tracking-wider text-sm">{t.health}</h3>
                </div>
-               <p className="text-3xl font-extrabold">Excellent</p>
-               <p className="text-sm text-emerald-100 mt-2 font-medium">Your investments are fully secured and outperforming inflation.</p>
+               <p className="text-3xl font-extrabold">{t.excellent}</p>
+               <p className="text-sm text-emerald-100 mt-2 font-medium">{t.health_desc}</p>
             </div>
           </div>
         </div>
@@ -87,20 +151,20 @@ export default function Dashboard() {
         <div className="bg-white dark:bg-slate-900 rounded-[2rem] shadow-xl border border-slate-200/60 dark:border-slate-800 overflow-hidden relative z-10">
           <div className="p-8 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20 flex justify-between items-center">
             <div>
-              <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">Active Fixed Deposits</h2>
-              <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 font-medium">All your current investments in one place.</p>
+              <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">{t.active_fd}</h2>
+              <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 font-medium">{t.active_desc}</p>
             </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead className="bg-slate-50 dark:bg-slate-950/50 text-slate-500 dark:text-slate-400 uppercase text-xs font-extrabold tracking-widest border-b border-slate-100 dark:border-slate-800/80">
                 <tr>
-                  <th className="px-8 py-5">Bank</th>
-                  <th className="px-8 py-5">Rashi (Amount)</th>
-                  <th className="px-8 py-5">Dar (Rate)</th>
-                  <th className="px-8 py-5">Maturity Date</th>
-                  <th className="px-8 py-5">Status</th>
-                  <th className="px-8 py-5 text-right">Action</th>
+                  <th className="px-8 py-5">{t.col_bank}</th>
+                  <th className="px-8 py-5">{t.col_amt}</th>
+                  <th className="px-8 py-5">{t.col_rate}</th>
+                  <th className="px-8 py-5">{t.col_mat}</th>
+                  <th className="px-8 py-5">{t.col_status}</th>
+                  <th className="px-8 py-5 text-right">{t.col_action}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 bg-white dark:bg-slate-900">
@@ -126,7 +190,7 @@ export default function Dashboard() {
                     </td>
                     <td className="px-8 py-6 text-right">
                       <button className="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/20 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 px-4 py-2 rounded-full transition-colors">
-                        Details <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                        {t.col_action} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                       </button>
                     </td>
                   </tr>
@@ -138,4 +202,12 @@ export default function Dashboard() {
       </div>
     </div>
   );
+}
+
+export default function Dashboard() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-50 dark:bg-slate-950"></div>}>
+      <DashboardContent />
+    </Suspense>
+  )
 }
