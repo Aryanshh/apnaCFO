@@ -10,7 +10,9 @@ class MistralService:
     def __init__(self):
         self.api_key = os.getenv("MISTRAL_API_KEY")
         if not self.api_key:
-            pass
+            # We provide a dummy key so the startup module doesn't crash uvicorn outright
+            # on platforms like Render where ENV vars might not be injected immediately.
+            self.api_key = "dummy_key_waiting_for_env"
         self.client = Mistral(api_key=self.api_key)
         self.model = "mistral-tiny"
 
