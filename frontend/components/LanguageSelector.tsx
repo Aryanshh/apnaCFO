@@ -68,7 +68,7 @@ export default function LanguageSelector({ onSelect }: LanguageSelectorProps) {
       </div>
 
       <div className="text-sm text-slate-400">
-        "Aap chat ke beech mein bhi bhasha badal sakte hain"
+        &quot;Aap chat ke beech mein bhi bhasha badal sakte hain&quot;
       </div>
     </div>
   );
