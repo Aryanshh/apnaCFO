@@ -16,7 +16,7 @@ export default function SelectLanguage() {
        {/* Inject the exact same UI as before, but wrapped gracefully */}
        <div className="z-10 w-full max-w-4xl p-10 bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-[3rem] shadow-2xl">
          <h2 className="text-2xl font-black text-center text-slate-800 dark:text-white mb-8 tracking-wide uppercase">Setup Protocol</h2>
-         <LanguageSelector onSelect={(lang) => router.push(`/chat?lang=${lang}`)} />
+         <LanguageSelector onSelect={(lang) => router.push(`/home?lang=${lang}`)} />
        </div>
     </div>
   )
